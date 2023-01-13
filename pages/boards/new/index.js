@@ -39,43 +39,63 @@ export default function index() {
 
   function handleWriter(e) {
     setWriter(e.target.value);
-    if (writer === '') {
-      setWriterError('작성자를 입력해주세요');
+    if (writer !== '') {
+      setWriterError('');
     }
   }
 
   function handlePassword(e) {
     setPassword(e.target.value);
-    if (password === '') {
-      setPasswordError('비밀번호를 입력해주세요');
+    if (password !== '') {
+      setPasswordError('');
     }
   }
   function handleBoardTitle(e) {
     setBoardTitle(e.target.value);
-    if (boardTitle === '') {
-      setBoardTitleError('제목을 입력해주세요');
+    if (boardTitle !== '') {
+      setBoardTitleError('');
     }
   }
   function handleBoardContents(e) {
     setBoardContents(e.target.value);
-    if (boardContents === '') {
-      setBoardContentsError('내용을 입력해주세요');
+    if (boardContents !== '') {
+      setBoardContentsError('');
     }
   }
   function handleAddress(e) {
     setAddress(e.target.value);
-    if (address === '') {
-      setAddressError('주소를 입력해주세요');
+    if (address !== '') {
+      setAddressError('');
     }
   }
   function handleYoutubeLink(e) {
     setYoutubeLink(e.target.value);
-    if (youtubeLink === '') {
-      setYoutubeLinkError('유튜브링크를 입력해주세요');
+    if (youtubeLink !== '') {
+      setYoutubeLinkError('');
     }
   }
 
   function onSubmitForm() {
+    if (!writer) {
+      setWriterError('작성자를 입력해주세요');
+    }
+    if (!password) {
+      setPasswordError('비밀번호를 입력해주세요');
+    }
+    if (!boardTitle) {
+      setBoardTitleError('제목을 입력해주세요');
+    }
+    if (!boardContents) {
+      setBoardContentsError('내용을 입력해주세요');
+    }
+    if (!address) {
+      setAddressError('주소를 입력해주세요');
+    }
+
+    if (!youtubeLink) {
+      setYoutubeLinkError('유튜브링크를 입력해주세요');
+    }
+
     if (
       writer &&
       password &&
@@ -84,6 +104,7 @@ export default function index() {
       address &&
       youtubeLink
     ) {
+      // 메시지 알림 이전, Backend 컴퓨터에 있는 API(함수) 요청하기
       alert('게시물이 정상적으로 등록되었습니다.');
     }
   }
