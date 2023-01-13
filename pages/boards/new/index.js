@@ -1,191 +1,109 @@
-import styled from '@emotion/styled';
-
-const Wrapper = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1200px;
-  padding: 0 101px;
-  box-shadow: 0px 4px 20px 0px #00000033;
-  font-family: Noto Sans CJK KR;
-`;
-
-const Title = styled.p`
-  font-size: 36px;
-  font-weight: 700;
-  margin: 60px 0 40px;
-`;
-
-const WriterWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-bottom: 40px;
-`;
-
-const InputWrapperSmall = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 40px;
-`;
-
-const BoardLabel = styled.label`
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 16px;
-  .active {
-    box-shadow: 0px 4px 4px 0px #00000040;
-    font-weight: 500;
-  }
-`;
-
-const BoardInputRow = styled.input`
-  box-sizing: border-box;
-  border: 1px solid #bdbdbd;
-  padding: 14px 16px;
-  width: 486px;
-  ::placeholder {
-    color: #bdbdbd;
-    font-size: 16px;
-    font-weight: 400;
-  }
-`;
-const BoardInput = styled.input`
-  box-sizing: border-box;
-  border: 1px solid #bdbdbd;
-  padding: 14px 16px;
-  width: 100%;
-  ::placeholder {
-    color: #bdbdbd;
-    font-size: 16px;
-    font-weight: 400;
-  }
-`;
-
-const ContentField = styled.textarea`
-  box-sizing: border-box;
-
-  border: 1px solid #bdbdbd;
-  padding: 14px 16px;
-  width: 100%;
-  height: 480px;
-  ::placeholder {
-    color: #bdbdbd;
-    font-size: 16px;
-    font-weight: 400;
-  }
-`;
-
-const SearchWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 16px;
-`;
-
-const ZipInput = styled.input`
-  width: 77px;
-  box-sizing: border-box;
-  border: 1px solid #bdbdbd;
-  padding: 14px 15px;
-  margin-right: 16px;
-  ::placeholder {
-    color: #bdbdbd;
-    font-size: 16px;
-    font-weight: 400;
-  }
-`;
-
-const SearchButton = styled.button`
-  background: #000000;
-  color: white;
-  padding: 14px 16px;
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const AddressInput = styled.input`
-  box-sizing: border-box;
-  border: 1px solid #bdbdbd;
-  padding: 14px 0;
-  width: 100%;
-  margin-bottom: ${props => (props.marginBottom ? '30px' : '0px')};
-  ::placeholder {
-    color: #bdbdbd;
-    font-size: 16px;
-    font-weight: 400;
-  }
-`;
-
-const PhotoWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const Photo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 78px;
-  width: 78px;
-  margin-right: 24px;
-  background: #bdbdbd;
-  p {
-    font-size: 12px;
-    font-weight: 500;
-    margin: 5px 0 0;
-  }
-`;
-
-const SettingWrapper = styled.div`
-  width: 100%;
-`;
-
-const RadioInput = styled.input`
-  cursor: pointer;
-`;
-
-const RadioLabel = styled.label`
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  margin-right: 22px;
-  margin-left: 10px;
-`;
-
-const SubmitButton = styled.button`
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  padding: 14px 60px;
-  background: #ffd600;
-  border: none;
-  margin: 80px auto 100px;
-`;
+import { useState } from 'react';
+import {
+  AddressInput,
+  BoardInput,
+  BoardInputRow,
+  BoardLabel,
+  ContentField,
+  ErrorMessage,
+  InputWrapper,
+  InputWrapperSmall,
+  Photo,
+  PhotoWrapper,
+  RadioInput,
+  RadioLabel,
+  SearchButton,
+  SearchWrapper,
+  SettingWrapper,
+  SubmitButton,
+  Title,
+  Wrapper,
+  WriterWrapper,
+  ZipInput,
+} from '../../../styles/emotion';
 
 export default function index() {
+  const [writer, setWriter] = useState('');
+  const [password, setPassword] = useState('');
+  const [boardTitle, setBoardTitle] = useState('');
+  const [boardContents, setBoardContents] = useState('');
+  const [address, setAddress] = useState('');
+  const [youtubeLink, setYoutubeLink] = useState('');
+
+  const [writerError, setWriterError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [boardTitleError, setBoardTitleError] = useState('');
+  const [boardContentsError, setBoardContentsError] = useState('');
+  const [addressError, setAddressError] = useState('');
+  const [youtubeLinkError, setYoutubeLinkError] = useState('');
+
+  function handleWriter(e) {
+    setWriter(e.target.value);
+    if (writer === '') {
+      setWriterError('작성자를 입력해주세요');
+    }
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value);
+    if (password === '') {
+      setPasswordError('비밀번호를 입력해주세요');
+    }
+  }
+  function handleBoardTitle(e) {
+    setBoardTitle(e.target.value);
+    if (boardTitle === '') {
+      setBoardTitleError('제목을 입력해주세요');
+    }
+  }
+  function handleBoardContents(e) {
+    setBoardContents(e.target.value);
+    if (boardContents === '') {
+      setBoardContentsError('내용을 입력해주세요');
+    }
+  }
+  function handleAddress(e) {
+    setAddress(e.target.value);
+    if (address === '') {
+      setAddressError('주소를 입력해주세요');
+    }
+  }
+  function handleYoutubeLink(e) {
+    setYoutubeLink(e.target.value);
+    if (youtubeLink === '') {
+      setYoutubeLinkError('유튜브링크를 입력해주세요');
+    }
+  }
+
+  function onSubmitForm() {
+    if (
+      writer &&
+      password &&
+      boardTitle &&
+      boardContents &&
+      address &&
+      youtubeLink
+    ) {
+      alert('게시물이 정상적으로 등록되었습니다.');
+    }
+  }
+
   return (
     <>
       <Wrapper>
         <Title>게시물 등록</Title>
         <WriterWrapper>
           <InputWrapperSmall>
-            <BoardLabel htmlFor='name' className='active'>작성자</BoardLabel>
+            <BoardLabel htmlFor='name' className='active'>
+              작성자
+            </BoardLabel>
             <BoardInputRow
               placeholder='이름을 적어주세요.'
               id='name'
               type='text'
+              onChange={handleWriter}
             ></BoardInputRow>
+            <ErrorMessage>{writerError}</ErrorMessage>
           </InputWrapperSmall>
           <InputWrapperSmall>
             <BoardLabel htmlFor='password'>비밀번호</BoardLabel>
@@ -193,7 +111,9 @@ export default function index() {
               placeholder='비밀번호를 입력해주세요.'
               id='password'
               type='password'
+              onChange={handlePassword}
             ></BoardInputRow>
+            <ErrorMessage>{passwordError}</ErrorMessage>
           </InputWrapperSmall>
         </WriterWrapper>
         <InputWrapper>
@@ -202,14 +122,18 @@ export default function index() {
             placeholder='제목을 작성해주세요.'
             id='title'
             type='text'
+            onChange={handleBoardTitle}
           ></BoardInput>
+          <ErrorMessage>{boardTitleError}</ErrorMessage>
         </InputWrapper>
         <InputWrapper>
           <BoardLabel htmlFor='contents'>내용</BoardLabel>
           <ContentField
             placeholder='내용을 작성해주세요.'
             id='contents'
+            onChange={handleBoardContents}
           ></ContentField>
+          <ErrorMessage>{boardContentsError}</ErrorMessage>
         </InputWrapper>
         <InputWrapper>
           <BoardLabel htmlFor='address'>주소</BoardLabel>
@@ -217,8 +141,9 @@ export default function index() {
             <ZipInput placeholder='07250' type='text'></ZipInput>
             <SearchButton>우편번호 검색</SearchButton>
           </SearchWrapper>
-          <AddressInput marginBottom type='text'/>
-          <AddressInput type='text'/>
+          <AddressInput marginBottom type='text' onChange={handleAddress} />
+          <AddressInput type='text' />
+          <ErrorMessage>{addressError}</ErrorMessage>
         </InputWrapper>
         <InputWrapper>
           <BoardLabel htmlFor='youtube'>유튜브</BoardLabel>
@@ -226,7 +151,9 @@ export default function index() {
             placeholder='링크를 복사해주세요.'
             id='youtube'
             type='url'
+            onChange={handleYoutubeLink}
           ></BoardInput>
+          <ErrorMessage>{youtubeLinkError}</ErrorMessage>
         </InputWrapper>
         <InputWrapper>
           <BoardLabel htmlFor='attachPhoto'>사진첨부</BoardLabel>
@@ -286,7 +213,7 @@ export default function index() {
             <RadioLabel htmlFor='photoSetting'>사진</RadioLabel>
           </SettingWrapper>
         </InputWrapper>
-        <SubmitButton>등록하기</SubmitButton>
+        <SubmitButton onClick={onSubmitForm}>등록하기</SubmitButton>
       </Wrapper>
     </>
   );
