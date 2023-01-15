@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import { useState } from 'react';
 import {
   AddressInput,
@@ -22,20 +23,31 @@ import {
   ZipInput,
 } from '../../../styles/emotion';
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      title
+    }
+  }
+`;
+
 export default function index() {
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
-  const [boardTitle, setBoardTitle] = useState('');
-  const [boardContents, setBoardContents] = useState('');
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
   const [address, setAddress] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
 
   const [writerError, setWriterError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [boardTitleError, setBoardTitleError] = useState('');
-  const [boardContentsError, setBoardContentsError] = useState('');
+  const [titleError, setTitleError] = useState('');
+  const [contentsError, setContentsError] = useState('');
   const [addressError, setAddressError] = useState('');
   const [youtubeLinkError, setYoutubeLinkError] = useState('');
+
+  const [createBoard] = useMutation(CREATE_BOARD);
 
   function handleWriter(e) {
     setWriter(e.target.value);
@@ -50,16 +62,16 @@ export default function index() {
       setPasswordError('');
     }
   }
-  function handleBoardTitle(e) {
-    setBoardTitle(e.target.value);
-    if (boardTitle !== '') {
-      setBoardTitleError('');
+  function handleTitle(e) {
+    setTitle(e.target.value);
+    if (title !== '') {
+      setTitleError('');
     }
   }
-  function handleBoardContents(e) {
-    setBoardContents(e.target.value);
-    if (boardContents !== '') {
-      setBoardContentsError('');
+  function handleContents(e) {
+    setContents(e.target.value);
+    if (contents !== '') {
+      setContentsError('');
     }
   }
   function handleAddress(e) {
@@ -75,18 +87,18 @@ export default function index() {
     }
   }
 
-  function onSubmitForm() {
+  const onSubmitForm = async () => {
     if (!writer) {
       setWriterError('작성자를 입력해주세요');
     }
     if (!password) {
       setPasswordError('비밀번호를 입력해주세요');
     }
-    if (!boardTitle) {
-      setBoardTitleError('제목을 입력해주세요');
+    if (!title) {
+      setTitleError('제목을 입력해주세요');
     }
-    if (!boardContents) {
-      setBoardContentsError('내용을 입력해주세요');
+    if (!contents) {
+      setContentsError('내용을 입력해주세요');
     }
     if (!address) {
       setAddressError('주소를 입력해주세요');
@@ -96,18 +108,22 @@ export default function index() {
       setYoutubeLinkError('유튜브링크를 입력해주세요');
     }
 
-    if (
-      writer &&
-      password &&
-      boardTitle &&
-      boardContents &&
-      address &&
-      youtubeLink
-    ) {
+    if (writer && password && title && contents && address && youtubeLink) {
       // 메시지 알림 이전, Backend 컴퓨터에 있는 API(함수) 요청하기
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer,
+            password,
+            title,
+            contents,
+          },
+        },
+      });
+      console.log(result);
       alert('게시물이 정상적으로 등록되었습니다.');
     }
-  }
+  };
 
   return (
     <>
@@ -143,18 +159,18 @@ export default function index() {
             placeholder='제목을 작성해주세요.'
             id='title'
             type='text'
-            onChange={handleBoardTitle}
+            onChange={handleTitle}
           ></BoardInput>
-          <ErrorMessage>{boardTitleError}</ErrorMessage>
+          <ErrorMessage>{titleError}</ErrorMessage>
         </InputWrapper>
         <InputWrapper>
           <BoardLabel htmlFor='contents'>내용</BoardLabel>
           <ContentField
             placeholder='내용을 작성해주세요.'
             id='contents'
-            onChange={handleBoardContents}
+            onChange={handleContents}
           ></ContentField>
-          <ErrorMessage>{boardContentsError}</ErrorMessage>
+          <ErrorMessage>{contentsError}</ErrorMessage>
         </InputWrapper>
         <InputWrapper>
           <BoardLabel htmlFor='address'>주소</BoardLabel>
