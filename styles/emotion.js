@@ -118,7 +118,7 @@ export const AddressInput = styled.input`
   border: 1px solid #bdbdbd;
   padding: 14px 0;
   width: 100%;
-  margin-bottom: ${props => (props.marginBottom ? '30px' : '0px')};
+  margin-bottom: ${(props) => (props.marginBottom ? '30px' : '0px')};
   ::placeholder {
     color: #bdbdbd;
     font-size: 16px;
@@ -147,6 +147,13 @@ export const Photo = styled.div`
     font-weight: 500;
     margin: 5px 0 0;
   }
+`;
+
+export const PlusIcon = styled.div`
+  background-image: url('/assets/ic_add-24px.png');
+  background-size: cover;
+  height: 14px;
+  width: 14px;
 `;
 
 export const SettingWrapper = styled.div`
