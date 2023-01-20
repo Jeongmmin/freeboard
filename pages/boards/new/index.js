@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   AddressInput,
   BoardInput,
@@ -47,6 +48,8 @@ export default function index() {
   const [contentsError, setContentsError] = useState('');
   const [addressError, setAddressError] = useState('');
   const [youtubeLinkError, setYoutubeLinkError] = useState('');
+
+  const router = useRouter();
 
   const [createBoard] = useMutation(CREATE_BOARD);
 
@@ -123,6 +126,7 @@ export default function index() {
       });
       console.log(result);
       alert('게시물이 정상적으로 등록되었습니다.');
+      router.push(`/boards/details/${result.data.createBoard._id}`);
     }
   };
 
