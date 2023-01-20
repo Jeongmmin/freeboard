@@ -1,3 +1,5 @@
+import { useQuery, gql } from '@apollo/client';
+import { useRouter } from 'next/router';
 import {
   ContentsWrapper,
   CreatedDate,
@@ -6,17 +8,36 @@ import {
   LikeOrDisLike,
   LikeOrDisLikecount,
   NavIconWrapper,
-  Test,
   ThumbsIconWrapper,
   Title,
   UserInfoWrapper,
   UserName,
   VideoWrapper,
   Wrapper,
-  MenuButtonsWrapper
-} from '../../../styles/emotion';
+  MenuButtonsWrapper,
+} from '../../../../styles/emotion';
+
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
 
 export default function DetailPage() {
+  const router = useRouter();
+
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: router.query.id,
+    },
+  });
+
   return (
     <>
       <Wrapper>
@@ -24,8 +45,8 @@ export default function DetailPage() {
           <UserInfoWrapper>
             <img src='/assets/avatar.png' />
             <InfoText>
-              <UserName>노원두</UserName>
-              <CreatedDate>Date : 2021.02.18</CreatedDate>
+              <UserName>{data?.fetchBoard.writer}</UserName>
+              <CreatedDate>{data?.fetchBoard.createdAt}</CreatedDate>
             </InfoText>
           </UserInfoWrapper>
           <NavIconWrapper>
@@ -34,10 +55,10 @@ export default function DetailPage() {
           </NavIconWrapper>
         </Header>
         <ContentsWrapper>
-          <Title>게시글 제목입니다.</Title>
+          <Title>{data?.fetchBoard.title}</Title>
           <img src='/assets/detail-page-content.png' alt='' />
           <span>
-            가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하
+          {data?.fetchBoard.contents}
           </span>
         </ContentsWrapper>
         <VideoWrapper>
@@ -48,11 +69,11 @@ export default function DetailPage() {
         <LikeOrDisLike>
           <ThumbsIconWrapper marginRight='40px'>
             <img src='/assets/ic_thumb_up_off_alt-24px.png' alt='' />
-            <LikeOrDisLikecount color='#FFD600'>1920</LikeOrDisLikecount>
+            <LikeOrDisLikecount color='#FFD600'> {data?.fetchBoard.likeCount}</LikeOrDisLikecount>
           </ThumbsIconWrapper>
           <ThumbsIconWrapper>
             <img src='/assets/ic_thumb_down-24px.png' alt='' />
-            <LikeOrDisLikecount color='#828282'>1920</LikeOrDisLikecount>
+            <LikeOrDisLikecount color='#828282'>{data?.fetchBoard.dislikeCount}</LikeOrDisLikecount>
           </ThumbsIconWrapper>
         </LikeOrDisLike>
       </Wrapper>
