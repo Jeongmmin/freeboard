@@ -192,3 +192,128 @@ export const ErrorMessage = styled.div`
   width: 100%;
   margin-top: 12px;
 `;
+
+// detail Page
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 46.67px;
+  padding-bottom: 20px;
+  margin-top: 80px;
+  border-bottom: 1px solid #bdbdbd;
+`;
+
+export const UserInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const InfoText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 16.67px;
+  height: 100%;
+`;
+
+export const UserName = styled.span`
+  font-family: Noto Sans CJK KR;
+  font-size: 24px;
+  font-weight: 500;
+`;
+
+export const CreatedDate = styled.span`
+  font-family: Noto Sans CJK KR;
+  font-size: 16px;
+  font-weight: 400;
+  color: #828282;
+`;
+
+export const NavIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  img:last-child {
+    margin-left: 29.33px;
+  }
+`;
+
+export const ContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  margin-bottom: 120px;
+
+  img {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  span {
+    font-family: Noto Sans CJK KR;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+`;
+
+export const VideoWrapper = styled.div`
+  position: relative;
+  width: 486px;
+  height: 240px;
+  margin: 0 auto 163px;
+  background-color: yellow;
+  background: url('/assets/video.png');
+  background-size: cover;
+  div {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transform: translate(219px, 96px);
+    img {
+      position: absolute;
+      transform: translate(17px, 15px);
+    }
+  }
+`;
+
+export const LikeOrDisLike = styled.div`
+  display: flex;
+  margin-bottom: 80px;
+`;
+
+export const ThumbsIconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: ${(props) => props.marginRight};
+`;
+
+export const LikeOrDisLikecount = styled.div`
+  font-family: Noto Sans CJK KR;
+  font-size: 18px;
+  font-weight: 400;
+  color: ${(props) => props.color};
+`;
+
+export const MenuButtonsWrapper = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin: 101px auto 87px;
+  /* border-bottom: 1px solid #BDBDBD; */
+  button {
+    font-family: 'Noto Sans CJK KR';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    border: 1px solid #bdbdbd;
+    padding: 10.5px 60px;
+    background: white;
+    margin-right: 24px;
+  }
+`;
