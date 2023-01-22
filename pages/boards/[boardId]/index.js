@@ -16,7 +16,7 @@ import {
   Wrapper,
   MenuButtonsWrapper,
   Avatar,
-} from '../../../../styles/emotion';
+} from '../../../styles/emotion';
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -35,7 +35,7 @@ export default function DetailPage() {
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: router.query.id,
+      boardId: router.query.boardId,
     },
   });
 

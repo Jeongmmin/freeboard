@@ -126,7 +126,7 @@ export default function index() {
         });
         console.log(result);
         alert('게시물이 정상적으로 등록되었습니다.');
-        router.push(`/boards/details/${result.data.createBoard._id}`);
+        router.push(`/boards/${result.data.createBoard._id}`);
       } catch (e) {
         alert(e.message);
       }
