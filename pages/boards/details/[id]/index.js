@@ -15,6 +15,7 @@ import {
   VideoWrapper,
   Wrapper,
   MenuButtonsWrapper,
+  Avatar,
 } from '../../../../styles/emotion';
 
 const FETCH_BOARD = gql`
@@ -43,7 +44,7 @@ export default function DetailPage() {
       <Wrapper>
         <Header>
           <UserInfoWrapper>
-            <img src='/assets/avatar.png' />
+            <Avatar src='/assets/avatar.png' />
             <InfoText>
               <UserName>{data?.fetchBoard.writer}</UserName>
               <CreatedDate>{data?.fetchBoard.createdAt}</CreatedDate>

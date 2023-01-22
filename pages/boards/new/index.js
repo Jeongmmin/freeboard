@@ -113,20 +113,23 @@ export default function index() {
     }
 
     if (writer && password && title && contents && address && youtubeLink) {
-      // 메시지 알림 이전, Backend 컴퓨터에 있는 API(함수) 요청하기
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer,
-            password,
-            title,
-            contents,
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer,
+              password,
+              title,
+              contents,
+            },
           },
-        },
-      });
-      console.log(result);
-      alert('게시물이 정상적으로 등록되었습니다.');
-      router.push(`/boards/details/${result.data.createBoard._id}`);
+        });
+        console.log(result);
+        alert('게시물이 정상적으로 등록되었습니다.');
+        router.push(`/boards/details/${result.data.createBoard._id}`);
+      } catch (e) {
+        alert(e.message);
+      }
     }
   };
 

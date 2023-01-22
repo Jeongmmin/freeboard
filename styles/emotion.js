@@ -211,10 +211,13 @@ export const UserInfoWrapper = styled.div`
   align-items: center;
 `;
 
+export const Avatar = styled.img`
+  margin-right: 16.67px;
+`;
+
 export const InfoText = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 16.67px;
   height: 100%;
 `;
 
@@ -291,6 +294,9 @@ export const ThumbsIconWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-right: ${(props) => props.marginRight};
+  img {
+    cursor: pointer;
+  }
 `;
 
 export const LikeOrDisLikecount = styled.div`
@@ -315,5 +321,6 @@ export const MenuButtonsWrapper = styled.div`
     padding: 10.5px 60px;
     background: white;
     margin-right: 24px;
+    cursor: pointer;
   }
 `;
