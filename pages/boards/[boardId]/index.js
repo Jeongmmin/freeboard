@@ -46,8 +46,8 @@ export default function DetailPage() {
           <UserInfoWrapper>
             <Avatar src='/assets/avatar.png' />
             <InfoText>
-              <UserName>{data?.fetchBoard.writer}</UserName>
-              <CreatedDate>{data?.fetchBoard.createdAt}</CreatedDate>
+              <UserName>{data?.fetchBoard?.writer}</UserName>
+              <CreatedDate>{data?.fetchBoard?.createdAt}</CreatedDate>
             </InfoText>
           </UserInfoWrapper>
           <NavIconWrapper>
@@ -56,10 +56,10 @@ export default function DetailPage() {
           </NavIconWrapper>
         </Header>
         <ContentsWrapper>
-          <Title>{data?.fetchBoard.title}</Title>
+          <Title>{data?.fetchBoard?.title}</Title>
           <img src='/assets/detail-page-content.png' alt='' />
           <span>
-          {data?.fetchBoard.contents}
+          {data?.fetchBoard?.contents}
           </span>
         </ContentsWrapper>
         <VideoWrapper>
@@ -74,7 +74,7 @@ export default function DetailPage() {
           </ThumbsIconWrapper>
           <ThumbsIconWrapper>
             <img src='/assets/ic_thumb_down-24px.png' alt='' />
-            <LikeOrDisLikecount color='#828282'>{data?.fetchBoard.dislikeCount}</LikeOrDisLikecount>
+            <LikeOrDisLikecount color='#828282'>{data?.fetchBoard?.dislikeCount}</LikeOrDisLikecount>
           </ThumbsIconWrapper>
         </LikeOrDisLike>
       </Wrapper>
